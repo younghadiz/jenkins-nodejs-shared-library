@@ -78,6 +78,15 @@ Deployment details:
                   '${remoteTarget}' \
                   'echo "SSH connection successful."'
 
+                echo "Checking remote Docker environment..."
+                ssh \
+                  -o BatchMode=yes \
+                  -o ConnectTimeout=15 \
+                  '${remoteTarget}' \
+                  'docker --version &&
+                  docker compose version &&
+                  docker ps >/dev/null'
+
                 echo "Preparing deployment directory..."
                 ssh \
                   -o BatchMode=yes \
